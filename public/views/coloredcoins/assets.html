@@ -1,0 +1,93 @@
+<div class="cc-assets-view" ng-controller="assetsController as assets">
+    <div class="onGoingProcess" ng-show="index.isOffline">
+        <div class="onGoingProcess-content" ng-style="{'background-color':'#222'}">
+            <div class="spinner">
+                <div class="rect1"></div>
+                <div class="rect2"></div>
+                <div class="rect3"></div>
+                <div class="rect4"></div>
+                <div class="rect5"></div>
+            </div>
+            <span translate>Reconnecting to Wallet Service...</span>
+        </div>
+    </div>
+
+    <div class="onGoingProcess" ng-show="index.anyOnGoingProcess && !index.isOffline">
+        <div class="onGoingProcess-content" ng-style="{'background-color':index.backgroundColor}">
+            <div class="spinner">
+                <div class="rect1"></div>
+                <div class="rect2"></div>
+                <div class="rect3"></div>
+                <div class="rect4"></div>
+                <div class="rect5"></div>
+            </div>
+      <span translate ng-show="
+        index.onGoingProcessName == 'openingWallet'
+        || index.onGoingProcessName == 'updatingStatus'
+        || index.onGoingProcessName == 'updatingBalance'
+        || index.onGoingProcessName == 'updatingPendingTxps'
+        "> Updating Wallet... </span>
+            <span translate ng-show="index.onGoingProcessName == 'scanning'">Scanning Wallet funds...</span>
+            <span translate ng-show="index.onGoingProcessName == 'recreating'">Recreating Wallet...</span>
+            <span translate ng-show="index.onGoingProcessName == 'generatingCSV'">Generating .csv file...</span>
+        </div>
+    </div>
+
+    <div class="onGoingProcess" ng-show="assets.onGoingProcess && !index.anyOnGoingProces && !index.isOffline">
+        <div class="onGoingProcess-content" ng-style="{'background-color':index.backgroundColor}">
+            <div class="spinner">
+                <div class="rect1"></div>
+                <div class="rect2"></div>
+                <div class="rect3"></div>
+                <div class="rect4"></div>
+                <div class="rect5"></div>
+            </div>
+            {{assets.onGoingProcess|translate}}...
+        </div>
+    </div>
+
+    <div class="topbar-container" ng-include="'colored-coins/views/includes/topbar.html'"></div>
+    <div class="cc-assets-list-view">
+        <div class="cc-assets-list" ng-show="assets.assets && !$root.updatingBalance">
+            <div ng-repeat="asset in assets.assets | orderBy:['assetName', 'utxo.txid']" ng-click="assets.openAssetModal(asset)"
+                 class="row collapse cc-assets-list-item">
+                <div class="columns cc-asset-icon-column text-center">
+                    <img ng-src="{{ asset.icon }}" class="asset-icon icon" ng-show="asset.icon"/>
+                    <img class="asset-icon icon cc-default-icon" ng-hide="asset.icon"/>
+                    &nbsp;
+                </div>
+                <div class="columns cc-asset-name-column">
+                    <div>
+                        <span class="text-bold size-16">{{ asset.metadata.assetName }}</span>
+                    </div>
+                    <div class="ellipsis text-gray size-14">
+                        {{ asset.metadata.description }}
+                    </div>
+                </div>
+                <div class="small-2 columns">
+                  <span class="size-16">
+                    {{ asset.asset.amount }} unit{{ asset.asset.amount != 1 ? 's' : '' }}
+                    <i class="fi-lock" ng-show="asset.locked"></i>
+                  </span>
+                </div>
+                <div class="small-3 columns hide-for-small">
+                    <span class="size-14"><span translate>Issued by</span>: {{ asset.metadata.issuer }}</span>
+                </div>
+                <div class="small-1 columns text-right">
+                    <i class="icon-arrow-right3 size-18"></i>
+                </div>
+            </div>
+        </div>
+        <div class="cc-api-error" ng-show="assets.error">
+            <h3 translate>Error connecting to ColoredCoins</h3>
+            <span class="nb">{{ assets.error }}</span>
+        </div>
+        <div class="cc-no-assets" ng-show="assets.assets && assets.assets.length == 0">
+            <h3 translate>You don't have any assets.</h3>
+            <div>Click <a ng-click="assets.openIssueModal()">here</a> to issue you first!</div>
+            <span class="nb">(<span translate>This requires some Bitcoins for the miner fee</span>)</span>
+        </div>
+    </div>
+</div>
+<div class="extra-margin-bottom"></div>
+<div ng-include="'views/includes/menu.html'" ng-show="!index.noFocusedWallet"></div>

@@ -1,0 +1,19 @@
+<div>
+    <div class="left" ng-show="index.lockedBalanceSat">
+        <i class="fi-info size-24 m10r"></i>
+    </div>
+    <div class="size-10">
+              <span class="db text-bold">
+                <span translate>Available Balance</span>:
+                {{ availableBalanceStr }}
+              </span>
+              <span class="db text-gray" ng-show="index.lockedBalanceSat">
+                {{ index.lockedBalanceStr }}
+                <span translate>locked by pending payments</span>
+              </span>
+              <span class="text-gray" ng-show="coloredBalanceStr">
+                {{ coloredBalanceStr }}
+                <span translate>are used to hold assets</span>
+              </span>
+    </div>
+</div>

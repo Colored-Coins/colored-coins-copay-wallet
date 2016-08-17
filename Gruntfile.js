@@ -68,7 +68,8 @@ module.exports = function(grunt) {
           'src/js/routes.js',
           'src/js/services/*.js',
           'src/js/models/*.js',
-          'src/js/controllers/**/*.js'
+          'src/js/controllers/**/*.js',
+          'src/js/coloredcoins/**/*.js'
         ],
         tasks: ['concat:js']
       }
@@ -123,7 +124,13 @@ module.exports = function(grunt) {
           'src/js/coinbase.js',
           'src/js/init.js',
           'src/js/trezor-url.js',
-          'bower_components/trezor-connect/login.js'
+          'bower_components/trezor-connect/login.js',
+          'src/js/coloredcoins/copayColoredCoins.js',
+          'src/js/coloredcoins/overrides/*.js',
+          'src/js/coloredcoins/controllers/*.js',
+          'src/js/coloredcoins/filters/*.js',
+          'src/js/coloredcoins/services/*.js',
+          'src/js/coloredcoins/directives/*.js'
         ],
         dest: 'public/js/copay.js'
       },
