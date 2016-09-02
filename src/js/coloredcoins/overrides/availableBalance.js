@@ -17,7 +17,7 @@ angular.module('copayAddon.coloredCoins').config(function ($provide) {
         $scope.coloredBalanceStr = profileService.formatAmount(coloredBalanceSat) + ' ' + config.unitName;
       });
     };
-    directive.templateUrl = 'colored-coins/views/includes/available-balance.html';
+    directive.templateUrl = 'views/coloredcoins/includes/available-balance.html';
     return $delegate;
   });
 

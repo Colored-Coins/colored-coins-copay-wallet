@@ -127,7 +127,7 @@ module.exports = function(grunt) {
           'bower_components/trezor-connect/login.js',
           'src/js/coloredcoins/copayColoredCoins.js',
           'src/js/coloredcoins/overrides/*.js',
-          'src/js/coloredcoins/controllers/*.js',
+          'src/js/coloredcoins/controllers/**/*.js',
           'src/js/coloredcoins/filters/*.js',
           'src/js/coloredcoins/services/*.js',
           'src/js/coloredcoins/directives/*.js'

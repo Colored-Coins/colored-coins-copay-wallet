@@ -46,36 +46,41 @@
         </div>
     </div>
 
-    <div class="topbar-container" ng-include="'colored-coins/views/includes/topbar.html'"></div>
+    <div class="topbar-container"
+      ng-include="'views/coloredcoins/includes/topbar.html'"
+      ng-init="titleSection='Assets'; goBackToState = 'walletHome';">
+      ></div>
+
     <div class="cc-assets-list-view">
         <div class="cc-assets-list" ng-show="assets.assets && !$root.updatingBalance">
-            <div ng-repeat="asset in assets.assets | orderBy:['assetName', 'utxo.txid']" ng-click="assets.openAssetModal(asset)"
-                 class="row collapse cc-assets-list-item">
-                <div class="columns cc-asset-icon-column text-center">
-                    <img ng-src="{{ asset.icon }}" class="asset-icon icon" ng-show="asset.icon"/>
-                    <img class="asset-icon icon cc-default-icon" ng-hide="asset.icon"/>
-                    &nbsp;
-                </div>
-                <div class="columns cc-asset-name-column">
-                    <div>
-                        <span class="text-bold size-16">{{ asset.metadata.assetName }}</span>
-                    </div>
-                    <div class="ellipsis text-gray size-14">
-                        {{ asset.metadata.description }}
-                    </div>
-                </div>
-                <div class="small-2 columns">
-                  <span class="size-16">
-                    {{ asset.asset.amount }} unit{{ asset.asset.amount != 1 ? 's' : '' }}
-                    <i class="fi-lock" ng-show="asset.locked"></i>
-                  </span>
-                </div>
-                <div class="small-3 columns hide-for-small">
-                    <span class="size-14"><span translate>Issued by</span>: {{ asset.metadata.issuer }}</span>
-                </div>
-                <div class="small-1 columns text-right">
-                    <i class="icon-arrow-right3 size-18"></i>
-                </div>
+            <div ng-repeat="asset in assets.assets | orderBy:['assetName', 'utxo.txid']"
+                 ng-click="assets.openAssetModal(asset)"
+                 class="row collapse cc-assets-list-item last-transactions-content">
+                 <div class="large-1 medium-1 small-1 columns cc-asset-icon-column text-center">
+                     <img ng-src="{{ asset.icon }}" class="asset-icon icon" ng-show="asset.icon"/>
+                     <img class="asset-icon icon cc-default-icon" ng-hide="asset.icon"/>
+                     &nbsp;
+                 </div>
+                 <div class="large-4 medium-4 small-4 columns cc-asset-name-column">
+                     <div>
+                         <span class="text-bold size-16">{{ asset.metadata.assetName }}</span>
+                     </div>
+                     <div class="ellipsis text-gray size-14">
+                         {{ asset.metadata.description }}
+                     </div>
+                 </div>
+                 <div class="large-4 medium-4 small-4 columns hide-for-small">
+                     <span class="size-14"><span translate>Issuer</span>: {{ asset.metadata.issuer }}</span>
+                 </div>
+                 <div class="large-2 medium-2 small-2 columns">
+                   <span class="size-16">
+                     {{ asset.asset.amount }}
+                     <i class="fi-lock" ng-show="asset.locked"></i>
+                   </span>
+                 </div>
+                 <div class="large-1 medium-1 small-1 columns text-right">
+                     <i class="icon-arrow-right3 size-18"></i>
+                 </div>
             </div>
         </div>
         <div class="cc-api-error" ng-show="assets.error">
@@ -90,4 +95,3 @@
     </div>
 </div>
 <div class="extra-margin-bottom"></div>
-<div ng-include="'views/includes/menu.html'" ng-show="!index.noFocusedWallet"></div>

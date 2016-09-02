@@ -20,7 +20,7 @@ module
             needProfile: true,
             views: {
               'main': {
-                templateUrl: 'coloredcoins/assets.html'
+                templateUrl: 'views/coloredcoins/assets.html'
               }
             }
           });

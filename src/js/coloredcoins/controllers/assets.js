@@ -1,7 +1,14 @@
 'use strict';
 
 angular.module('copayAddon.coloredCoins')
-    .controller('assetsController', function ($rootScope, $scope, $timeout, $modal, isCordova, coloredCoins) {
+    .controller('assetsController', function (
+      $rootScope,
+      $scope,
+      $timeout,
+      $ionicModal,
+      platformInfo,
+      coloredCoins
+    ) {
       var self = this;
 
       this.assets = coloredCoins.assets;
@@ -29,7 +36,7 @@ angular.module('copayAddon.coloredCoins')
         var self = this;
         self.blockUx = !!name;
 
-        if (isCordova) {
+        if (platformInfo.isCordova) {
           if (name) {
             window.plugins.spinnerDialog.hide();
             window.plugins.spinnerDialog.show(null, name + '...', true);
@@ -47,62 +54,23 @@ angular.module('copayAddon.coloredCoins')
       // show ongoing process if any
       this.setOngoingProcess(coloredCoins.onGoingProcess);
 
-      var hideModal = function () {
-        var m = angular.element(document.getElementsByClassName('reveal-modal'));
-        m.addClass('slideOutDown');
-      };
-
-      this.openTransferModal = function (asset) {
-        $scope.asset = asset;
-
-        var modalInstance = $modal.open({
-          templateUrl: 'colored-coins/views/modals/send.html',
-          scope: $scope,
-          windowClass: 'full animated slideInUp',
-          controller: AssetTransferController
-        });
-
-        modalInstance.result.finally(hideModal);
-      };
-
       this.openAssetModal = function (asset) {
-        var ModalInstanceCtrl = function ($rootScope, $scope, $modalInstance, insight, profileService) {
-          $scope.asset = asset;
-          insight = insight.get();
-          insight.getTransaction(asset.issuanceTxid, function (err, tx) {
-            if (!err) {
-              $scope.issuanceTx = tx;
-            }
-          });
-          $scope.openTransferModal = self.openTransferModal;
-
-          $scope.openBlockExplorer = function (asset) {
-            var url = 'http://coloredcoins.org/explorer/';
-            var networkSuffix = profileService.focusedClient.credentials.network == 'testnet' ? 'testnet/' : '';
-            $rootScope.openExternalLink(url + networkSuffix + 'tx/' + asset.issuanceTxid);
-          };
-
-          $scope.cancel = function () {
-            $modalInstance.dismiss('cancel');
-          };
-        };
-        var modalInstance = $modal.open({
-          templateUrl: 'colored-coins/views/modals/asset-details.html',
-          windowClass: 'full animated slideInUp',
-          controller: ModalInstanceCtrl
+        $scope.asset = asset;
+        console.log(asset);
+        $ionicModal.fromTemplateUrl('views/coloredcoins/modals/asset-details.html', {
+          scope: $scope
+        }).then(function(modal) {
+          $scope.assetDetailsModal = modal;
+          $scope.assetDetailsModal.show();
         });
-
-        modalInstance.result.finally(hideModal);
       };
 
       this.openIssueModal = function () {
-
-        var modalInstance = $modal.open({
-          templateUrl: 'colored-coins/views/modals/issue.html',
-          windowClass: 'full animated slideInUp',
+        $ionicModal.fromTemplateUrl('views/coloredcoins/modals/issue.html', {
           controller: AssetIssueController
+        }).then(function(modal) {
+          $scope.issueAssetModal = modal;
+          $scope.issueAssetModal.show();
         });
-
-        modalInstance.result.finally(hideModal);
       };
     });

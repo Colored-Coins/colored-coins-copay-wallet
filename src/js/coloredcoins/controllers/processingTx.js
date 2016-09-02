@@ -1,7 +1,7 @@
 'use strict';
 
 function ProcessingTxController($rootScope, $scope, $timeout, $log, coloredCoins, gettext, profileService, feeService,
-                                lodash, bitcore, txStatus, $modalInstance) {
+                                lodash, bitcore, txStatus) {
   this.$rootScope = $rootScope;
   this.profileService = profileService;
   this.$log = $log;
@@ -13,7 +13,6 @@ function ProcessingTxController($rootScope, $scope, $timeout, $log, coloredCoins
   this.$scope = $scope;
   this.$timeout = $timeout;
   this.txStatus = txStatus;
-  this.$modalInstance = $modalInstance;
 
   var self = this;
 
@@ -21,10 +20,6 @@ function ProcessingTxController($rootScope, $scope, $timeout, $log, coloredCoins
 
   $scope.resetError = function () {
     self.error = self.success = null;
-  };
-
-  $scope.cancel = function () {
-    self.$modalInstance.dismiss('cancel');
   };
 }
 

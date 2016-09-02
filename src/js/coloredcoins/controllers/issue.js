@@ -31,6 +31,10 @@ var AssetIssueController = function ($rootScope, $scope, $modalInstance, $timeou
     lodash.pull($scope.issuance.userData, field);
   };
 
+  $scope.cancel = function () {
+    $scope.issueAssetModal.hide();
+  };
+
   var createAsset = function(issuance, iconData) {
     self.setOngoingProcess(gettext('Creating issuance transaction'));
     coloredCoins.createIssueTx(issuance, function (err, result) {
