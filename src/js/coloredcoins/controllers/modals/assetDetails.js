@@ -9,6 +9,9 @@ angular.module('copayAddon.coloredCoins')
       insight
     ) {
 
+  var fc = profileService.focusedClient;
+  $scope.color = fc.backgroundColor;
+
   insight = insight.get();
   insight.getTransaction($scope.asset.issuanceTxid, function (err, tx) {
     if (!err) {

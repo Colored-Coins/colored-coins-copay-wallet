@@ -1,10 +1,10 @@
 'use strict';
 
-var AssetIssueController = function ($rootScope, $scope, $modalInstance, $timeout, $log, coloredCoins, gettext,
+var AssetIssueController = function ($rootScope, $scope, $timeout, $log, coloredCoins, gettext,
                                      profileService, feeService, lodash, bitcore, txStatus, ccConfig, Upload, ccFeeService, configService) {
 
   ProcessingTxController.call(this, $rootScope, $scope, $timeout, $log, coloredCoins, gettext, profileService, feeService,
-      lodash, bitcore, txStatus, $modalInstance);
+      lodash, bitcore, txStatus);
 
   var self = this;
 
@@ -101,3 +101,5 @@ var AssetIssueController = function ($rootScope, $scope, $modalInstance, $timeou
 };
 
 AssetIssueController.prototype = Object.create(ProcessingTxController.prototype);
+
+angular.module('copayAddon.coloredCoins').controller('assetIssueController', AssetIssueController);

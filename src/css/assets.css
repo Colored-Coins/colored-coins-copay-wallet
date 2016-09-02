@@ -4,7 +4,7 @@
 
 .long-line {
   font-size: 0.6rem;
-  margin-top: 5px;  
+  margin-top: 5px;
 }
 
 .asset-urls a {
@@ -197,11 +197,12 @@
 }
 
 .cc-inline-switch {
-    margin-bottom: 1.5rem !important;
+  padding-left: 0;
+  background-color: transparent !important;
 }
 
-.cc-inline-switch label {
-    line-height: 2rem;
+.cc-inline-switch .toggle {
+  right: 0;
 }
 
 /* ios safari */
