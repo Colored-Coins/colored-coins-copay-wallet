@@ -1,10 +1,11 @@
 'use strict';
 
-var AssetTransferController = function ($rootScope, $scope, $modalInstance, $timeout, $log, coloredCoins, gettext,
+var AssetTransferController = function ($rootScope, $scope, $timeout, $log, coloredCoins, gettext,
                                         profileService, feeService, lodash, bitcore, txStatus) {
 
   ProcessingTxController.call(this, $rootScope, $scope, $timeout, $log, coloredCoins, gettext, profileService, feeService,
-      lodash, bitcore, txStatus, $modalInstance);
+      lodash, bitcore, txStatus);
+
 
   var self = this;
 
@@ -27,6 +28,7 @@ var AssetTransferController = function ($rootScope, $scope, $modalInstance, $tim
   };
 
   $scope.cancel = function () {
+    console.log($scope.assetTransferModal);
     $scope.assetTransferModal.hide();
   };
 
@@ -73,3 +75,5 @@ var AssetTransferController = function ($rootScope, $scope, $modalInstance, $tim
 };
 
 AssetTransferController.prototype = Object.create(ProcessingTxController.prototype);
+
+angular.module('copayAddon.coloredCoins').controller('assetTransferController', AssetTransferController);
