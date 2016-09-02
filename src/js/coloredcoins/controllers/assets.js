@@ -56,7 +56,6 @@ angular.module('copayAddon.coloredCoins')
 
       this.openAssetModal = function (asset) {
         $scope.asset = asset;
-        console.log(asset);
         $ionicModal.fromTemplateUrl('views/coloredcoins/modals/asset-details.html', {
           scope: $scope
         }).then(function(modal) {

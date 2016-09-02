@@ -1,112 +1,111 @@
-<nav class="tab-bar">
-    <section class="left-small">
-        <a ng-click="cancel()">
-            <i class="icon-arrow-left3 icon-back"></i>
-            <span class="text-back" translate>Back</span>
-        </a>
-    </section>
-    <section class="middle tab-bar-section">
-        <h1 class="title ellipsis" ng-style="{'color':color}" translate>
-            Asset
-        </h1>
-    </section>
-
-    <section class="right-small">
-        <qr-scanner on-scan="onQrCodeScanned(data)" />
-    </section>
-</nav>
-
-<div class="modal-content fix-modals-touch">
-    <div class="header-modal text-center">
-        <div class="size-42">
-            {{ asset.metadata.assetName }}
-        </div>
-        <div class="size-18 m5t text-gray">
-            {{ asset.metadata.description }}
-        </div>
-        <div class="size-14 m20t">
-          <span class="db text-bold">
-            <span translate>Quantity</span>:
-            {{ asset.asset.amount }}
-          </span>
-        </div>
+<ion-modal-view ng-controller="assetTransferController">
+  <ion-header-bar align-title="center" class="tab-bar" ng-style="{'background-color':color}">
+    <div class="left-small">
+      <a ng-click="cancel()" class="p10">
+        <i class="icon-arrow-left3 icon-back"></i>
+        <span class="text-back" translate>Back</span>
+      </a>
     </div>
+    <h1 class="title ellipsis" translate>Send Asset</h1>
+    <div class="right-small">
+      <qr-scanner on-scan="onQrCodeScanned(data)" />
+    </div>
+  </ion-header-bar>
 
-    <div class="row m20t">
-        <div class="large-12 large-centered columns">
-            <form name="assetTransferForm" ng-submit="transferAsset(transfer, assetTransferForm)" ng-disabled="home.blockUx || home.onGoingProcess" novalidate>
-                <div class="box-notification" ng-show="error" ng-click="resetError()">
-                  <span class="text-warning">
-                    {{ error|translate }}
-                  </span>
-                    <a class="close-notification text-warning">&#215;</a>
-                </div>
+  <ion-content ng-style="{'background-color': '#F6F7F9'}">
+    <div class="modal-content">
+      <div class="header-modal text-center">
+          <div class="size-42">
+              {{ asset.metadata.assetName }}
+          </div>
+          <div class="size-18 m5t text-gray">
+              {{ asset.metadata.description }}
+          </div>
+          <div class="size-14 m20t">
+            <span class="db text-bold">
+              <span translate>Quantity</span>:
+              {{ asset.asset.amount }}
+            </span>
+          </div>
+      </div>
 
-                <div ng-hide="home.hideAddress">
-                    <div class="row collapse">
-                        <label for="address" class="left">
-                            <span translate>To</span>
-                        </label>
-                        <span ng-hide="assetTransferForm.address.$pristine">
-                          <span class="has-error right size-12" ng-show="assetTransferForm.address.$invalid && transfer._address">
-                            <i class="icon-close-circle size-14"></i>
-                            <span class="vm" translate>Not valid</span>
-                          </span>
-                          <small class="right text-primary" ng-show="!assetTransferForm.address.$invalid">
-                              <i class="icon-checkmark-circle size-14"></i>
-                          </small>
-                        </span>
-                    </div>
+      <div class="row m20t">
+          <div class="large-12 large-centered columns">
+              <form name="assetTransferForm" ng-submit="transferAsset(transfer, assetTransferForm)" ng-disabled="home.blockUx || home.onGoingProcess" novalidate>
+                  <div class="box-notification" ng-show="error" ng-click="resetError()">
+                    <span class="text-warning">
+                      {{ error|translate }}
+                    </span>
+                      <a class="close-notification text-warning">&#215;</a>
+                  </div>
 
-                    <div class="input">
-                        <input type="text" id="address" name="address" ng-disabled="home.blockUx || lockAddress"
-                               ng-attr-placeholder="{{'Bitcoin address'|translate}}" ng-model="transfer._address" valid-address
-                               required ng-focus="home.formFocus('address')" ng-blur="home.formFocus(false)">
-                    </div>
-                </div>
-                <div class="row" ng-hide="home.hideAmount">
-                    <div class="large-12 medium-12 columns">
-                        <div class="right" ng-hide="assetTransferForm.amount.$pristine && !assetTransferForm.amount.$modelValue ">
-                            <span class="has-error right size-12" ng-show="assetTransferForm.amount.$invalid">
-                                <i class="icon-close-circle size-14"></i>
-                                <span clas="vm" translate>Not valid</span>
+                  <div ng-hide="home.hideAddress">
+                      <div class="row collapse">
+                          <label for="address" class="left">
+                              <span translate>To</span>
+                          </label>
+                          <span ng-hide="assetTransferForm.address.$pristine">
+                            <span class="has-error right size-12" ng-show="assetTransferForm.address.$invalid && transfer._address">
+                              <i class="icon-close-circle size-14"></i>
+                              <span class="vm" translate>Not valid</span>
                             </span>
-                            <small class="text-primary right" ng-show="!assetTransferForm.amount.$invalid">
+                            <small class="right text-primary" ng-show="!assetTransferForm.address.$invalid">
                                 <i class="icon-checkmark-circle size-14"></i>
                             </small>
-                        </div>
-                        <div>
-                            <label for="amount">
-                                <span translate>Amount</span>
-                            </label>
+                          </span>
+                      </div>
 
-                            <div class="input">
-                                <input type="number" id="amount" ng-disabled="home.blockUx || home.lockAmount" name="amount"
-                                       ng-attr-placeholder="{{'Amount'|translate}}"
-                                       ng-model="transfer._amount" min="1" max="{{ asset.asset.amount }}" ng-pattern="/^\d*$/" required autocomplete="off"
-                                       ng-focus="home.formFocus('amount')" ng-blur="home.formFocus(false)">
-                                <a class="postfix" translate>units</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row" ng-show="!home.onGoingProcess">
-                    <div class="large-6 medium-6 small-6 columns"
-                             ng-show="!home.blockUx && (home.lockAddress || home.lockAmount)">
-                        <a ng-click="cancel()" class="button expand outline dark-gray round" translate>Cancel</a>
-                    </div>
-                    <div class="columns"
-                         ng-class="{'small-6 medium-6 large-6':(home.lockAddress || home.lockAmount)}">
-                        <button type="submit" class="button black round expand"
-                                ng-disabled="assetTransferForm.$invalid || home.blockUx ||  index.isOffline"
-                                ng-style="{'background-color':index.backgroundColor}" translate>
-                            Transfer
-                        </button>
-                    </div>
+                      <div class="input">
+                          <input type="text" id="address" name="address" ng-disabled="home.blockUx || lockAddress"
+                                 ng-attr-placeholder="{{'Bitcoin address'|translate}}" ng-model="transfer._address" valid-address
+                                 required ng-focus="home.formFocus('address')" ng-blur="home.formFocus(false)">
+                      </div>
+                  </div>
+                  <div class="row" ng-hide="home.hideAmount">
+                      <div class="large-12 medium-12 columns">
+                          <div class="right" ng-hide="assetTransferForm.amount.$pristine && !assetTransferForm.amount.$modelValue ">
+                              <span class="has-error right size-12" ng-show="assetTransferForm.amount.$invalid">
+                                  <i class="icon-close-circle size-14"></i>
+                                  <span clas="vm" translate>Not valid</span>
+                              </span>
+                              <small class="text-primary right" ng-show="!assetTransferForm.amount.$invalid">
+                                  <i class="icon-checkmark-circle size-14"></i>
+                              </small>
+                          </div>
+                          <div>
+                              <label for="amount">
+                                  <span translate>Amount</span>
+                              </label>
 
-                </div>
-            </form>
-        </div>
+                              <div class="input">
+                                  <input type="number" id="amount" ng-disabled="home.blockUx || home.lockAmount" name="amount"
+                                         ng-attr-placeholder="{{'Amount'|translate}}"
+                                         ng-model="transfer._amount" min="1" max="{{ asset.asset.amount }}" ng-pattern="/^\d*$/" required autocomplete="off"
+                                         ng-focus="home.formFocus('amount')" ng-blur="home.formFocus(false)">
+                                  <a class="postfix" translate>units</a>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row" ng-show="!home.onGoingProcess">
+                      <div class="large-6 medium-6 small-6 columns"
+                               ng-show="!home.blockUx && (home.lockAddress || home.lockAmount)">
+                          <a ng-click="cancel()" class="button expand outline dark-gray round" translate>Cancel</a>
+                      </div>
+                      <div class="columns"
+                           ng-class="{'small-6 medium-6 large-6':(home.lockAddress || home.lockAmount)}">
+                          <button type="submit" class="button black round expand"
+                                  ng-disabled="assetTransferForm.$invalid || home.blockUx ||  index.isOffline"
+                                  ng-style="{'background-color':index.backgroundColor}" translate>
+                              Transfer
+                          </button>
+                      </div>
+
+                  </div>
+              </form>
+          </div>
+      </div>
+      <div class="extra-margin-bottom"></div>
     </div>
-    <div class="extra-margin-bottom"></div>
-</div> <!-- END Send -->
+  </ion-content>
+</ion-modal-view>
