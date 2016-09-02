@@ -66,7 +66,7 @@ angular.module('copayAddon.coloredCoins')
 
       this.openIssueModal = function () {
         $ionicModal.fromTemplateUrl('views/coloredcoins/modals/issue.html', {
-          controller: AssetIssueController
+          scope: $scope
         }).then(function(modal) {
           $scope.issueAssetModal = modal;
           $scope.issueAssetModal.show();

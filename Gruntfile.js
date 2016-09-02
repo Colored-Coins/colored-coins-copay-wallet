@@ -120,7 +120,8 @@ module.exports = function(grunt) {
           'bower_components/ng-csv/build/ng-csv.js',
           'bower_components/angular-mocks/angular-mocks.js',
           'angular-pbkdf2/angular-pbkdf2.js',
-          'angular-bitcore-wallet-client/angular-bitcore-wallet-client.js'
+          'angular-bitcore-wallet-client/angular-bitcore-wallet-client.js',
+          'bower_components/ng-file-upload/ng-file-upload.js'
         ],
         dest: 'public/lib/angular.js'
       },

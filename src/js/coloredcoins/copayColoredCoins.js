@@ -1,6 +1,6 @@
 'use strict';
 
-var module = angular.module('copayAddon.coloredCoins', []);
+var module = angular.module('copayAddon.coloredCoins', ['ngFileUpload']);
 
 angular.module('copayAddon.coloredCoins')
     .value('ccConfig', {

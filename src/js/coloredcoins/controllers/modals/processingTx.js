@@ -18,6 +18,8 @@ function ProcessingTxController($rootScope, $scope, $timeout, $log, coloredCoins
 
   $scope.error = '';
 
+  $scope.color = profileService.focusedClient.backgroundColor;
+
   $scope.resetError = function () {
     self.error = self.success = null;
   };
