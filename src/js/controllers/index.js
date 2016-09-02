@@ -75,6 +75,10 @@ angular.module('copayApp.controllers').controller('indexController', function($r
     go.walletHome();
   };
 
+  self.showAssets = function() {
+    go.path('assets');
+  };
+
   self.allowRefresher = function() {
     if ($ionicSideMenuDelegate.getOpenRatio() != 0) self.allowPullToRefresh = false;
   }

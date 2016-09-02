@@ -26,6 +26,10 @@ var AssetTransferController = function ($rootScope, $scope, $modalInstance, $tim
     }
   };
 
+  $scope.cancel = function () {
+    $scope.assetTransferModal.hide();
+  };
+
   $scope.transferAsset = function (transfer, form) {
     if ($scope.asset.locked) {
       self._setError({ message: "Cannot transfer locked asset" });
