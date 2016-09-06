@@ -1,10 +1,12 @@
 'use strict';
 
 var AssetIssueController = function ($rootScope, $scope, $timeout, $log, coloredCoins, gettext,
-                                     profileService, feeService, lodash, bitcore, txStatus, ccConfig, Upload, ccFeeService, configService) {
+                                     profileService, lodash, bitcore, txStatus, ccConfig, Upload,
+                                     ccFeeService, configService, walletService, txFormatService,
+                                     ongoingProcess, $ionicModal) {
 
-  ProcessingTxController.call(this, $rootScope, $scope, $timeout, $log, coloredCoins, gettext, profileService, feeService,
-      lodash, bitcore, txStatus);
+  ProcessingTxController.call(this, $rootScope, $scope, $timeout, $log, coloredCoins, gettext, profileService,
+      lodash, bitcore, txStatus, walletService, configService, txFormatService, ongoingProcess, $ionicModal);
 
   var self = this;
 
