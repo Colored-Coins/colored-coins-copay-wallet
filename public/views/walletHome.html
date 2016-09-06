@@ -187,6 +187,7 @@
                     <span class="ellipsis">
                       <span ng-if="btx.note.body">{{btx.note.body}}</span>
                       <span ng-if="!btx.note.body" translate> Received</span>
+                      <span ng-if="btx.isAsset"> asset</span>
                     </span>
                   </span>
                   <span ng-show="btx.action == 'sent'">
@@ -201,8 +202,11 @@
                     <span class="ellipsis">
                       <span ng-if="btx.note.body">{{btx.note.body}}</span>
                       <span ng-if="!btx.note.body" translate>Moved</span>
+                      <span ng-if="btx.isAsset"> asset</span>
                     </span>
-
+                    <div class="ellipsis size-12 text-gray" ng-if="btx.isAsset">
+                       {{btx.isAsset.assetName}}
+                    </div>
                   </span>
                   <span class="label tu warning radius" ng-show="btx.action == 'invalid'" translate>Invalid</span>
                 </div>
@@ -215,7 +219,10 @@
                   <span  class="size-12" ng-if="btx.action == 'invalid'" translate>
                   (possible double spend)
                   </span>
-                  <span  ng-if="btx.action != 'invalid'">
+                  <div ng-if="btx.isAsset">
+                     {{btx.assetAmountStr}}
+                  </div>
+                  <span  ng-if="btx.action != 'invalid' && !btx.isAsset">
                   {{btx.amountStr}}
                   </span>
                 </span>

@@ -213,6 +213,7 @@ function ColoredCoins($rootScope, profileService, ccConfig, ccFeeService, bitcor
             locked: isLocked
           };
           assets.push(a);
+          console.log(a);
           if (assetsInfo.length == assets.length) {
             return cb(null, assets);
           }

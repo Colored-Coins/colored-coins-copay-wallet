@@ -25,10 +25,13 @@
             <p class="m0 text-gray size-14" translate>Moved</p>
           </div>
 
-          <div class="size-36" ng-click="copyToClipboard(btx.amountStr, $event)">
+          <div class="size-36" ng-if="!btx.isAsset" ng-click="copyToClipboard(btx.amountStr, $event)">
             <span class="enable_text_select">{{btx.amountStr}}</span>
           </div>
-          <div class="alternative-amount" ng-click="showRate=!showRate" ng-init="showRate = false">
+          <div class="size-36" ng-if="btx.isAsset" ng-click="copyToClipboard(btx.amountStr, $event)">
+            <span class="enable_text_select">{{btx.assetAmountStr}} of {{btx.isAsset.assetName}}</span>
+          </div>
+          <div class="alternative-amount" ng-if="!btx.isAsset" ng-click="showRate=!showRate" ng-init="showRate = false">
             <span class="label gray radius" ng-show="!showRate && alternativeAmountStr">
               {{alternativeAmountStr}}
             </span>
@@ -43,9 +46,8 @@
       </div>
 
       <h4 class="title m0" translate>Details</h4>
-
       <ul class="no-bullet size-14 m0">
-        <li ng-if="!btx.hasMultiplesOutputs && btx.addressTo && btx.addressTo != 'N/A'" class="line-b p10 oh"
+        <li ng-if="(!btx.hasMultiplesOutputs || btx.isAsset) && btx.addressTo && btx.addressTo != 'N/A'" class="line-b p10 oh"
           ng-click="copyToClipboard(btx.addressTo, $event)">
           <span class="text-gray" translate>To</span>
           <span class="right">
@@ -60,7 +62,7 @@
           </span>
         </li>
 
-        <li ng-show="btx.hasMultiplesOutputs" class="line-b p10 oh"
+        <li ng-show="btx.hasMultiplesOutputs && !btx.isAsset" class="line-b p10 oh"
           ng-click="showMultiplesOutputs = !showMultiplesOutputs">
           <span class="text-gray" translate>Recipients</span>
           <span class="right">{{btx.recipientCount}}
@@ -69,7 +71,7 @@
           </span>
         </li>
 
-        <div class="line-b" ng-show="btx.hasMultiplesOutputs && showMultiplesOutputs"
+        <div class="line-b" ng-show="btx.hasMultiplesOutputs && showMultiplesOutputs && !btx.isAsset"
           ng-repeat="output in btx.outputs"
           ng-include="'views/includes/output.html'">
         </div>
@@ -149,10 +151,15 @@
 
       <div ng-show="btx.txid" class="tx-details-blockchain">
         <div class="text-center m20t">
-          <button class="button outline round dark-gray tiny" ng-click="$root.openExternalLink('https://' +
+          <button class="button outline round dark-gray tiny" ng-hide="btx.isAsset" ng-click="$root.openExternalLink('https://' +
             (getShortNetworkName() == 'test' ? 'test-' : '') + 'insight.bitpay.com/tx/' + btx.txid)">
             <span class="text-gray" translate>See it on the blockchain</span>
           </button>
+          <button class="button outline round dark-gray tiny" ng-show="btx.isAsset" ng-click="$root.openExternalLink('http://coloredcoins.org/explorer/' +
+            (getShortNetworkName() == 'test' ? 'testnet/' : '') + 'tx/' + btx.txid)">
+              <span class="text-gray" translate>See it on the blockchain</span>
+          </button>
+
           <button class="button outline round dark-gray tiny" ng-click="showCommentPopup()">
             <span class="text-gray" translate ng-show="!btx.note">Add comment</i></span>
             <span class="text-gray" translate ng-show="btx.note">Edit comment</span>

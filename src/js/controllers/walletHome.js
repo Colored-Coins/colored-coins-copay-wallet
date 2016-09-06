@@ -849,7 +849,7 @@ angular.module('copayApp.controllers').controller('walletHomeController', functi
 
   this.openTxModal = function(btx) {
     var self = this;
-
+    console.log(btx);
     $scope.btx = lodash.cloneDeep(btx);
     $scope.self = self;
 
