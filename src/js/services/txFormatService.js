@@ -49,6 +49,7 @@ angular.module('copayApp.services').factory('txFormatService', function(profileS
     tx.isAsset = tx.customData && tx.customData.asset;
     if (tx.isAsset) {
       tx.assetAmountStr = tx.customData.asset.amount + " unit" + (tx.customData.asset.amount > 1 ? "s" : "");
+      tx.addressTo = tx.outputs[0].address;
     }
     tx.feeStr = formatFeeStr(tx.fee || tx.fees);
 
