@@ -20,9 +20,13 @@
             <img src="img/icon-sent-history.svg" alt="sync" width="50">
             <p class="m0 text-gray size-14" translate>Sent</p>
           </div>
-          <div ng-show="btx.action == 'moved'">
+          <div ng-show="btx.action == 'moved' && !(btx.isAsset && btx.isAsset.action == 'issue')">
             <img src="img/icon-moved.svg" alt="sync" width="50">
             <p class="m0 text-gray size-14" translate>Moved</p>
+          </div>
+          <div ng-show="btx.isAsset && btx.isAsset.action == 'issue'">
+            <i class="icon ion-ribbon-b issued-badge"></i>
+            <p class="m0 text-gray size-14" translate>Issued</p>
           </div>
 
           <div class="size-36" ng-if="!btx.isAsset" ng-click="copyToClipboard(btx.amountStr, $event)">

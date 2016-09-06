@@ -38,7 +38,7 @@ module
           }
         },
         txTemplateUrl: function() {
-          return 'coloredcoins/includes/transaction.html';
+          return 'views/coloredcoins/includes/transaction.html';
         }
       });
     });
