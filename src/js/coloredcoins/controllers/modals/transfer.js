@@ -1,11 +1,11 @@
 'use strict';
 
 var AssetTransferController = function ($rootScope, $scope, $timeout, $log, coloredCoins, gettext,
-                                        profileService, feeService, lodash, bitcore, txStatus) {
+                                        profileService, lodash, bitcore, txStatus, walletService,
+                                        configService, txFormatService, ongoingProcess, $ionicModal) {
 
-  ProcessingTxController.call(this, $rootScope, $scope, $timeout, $log, coloredCoins, gettext, profileService, feeService,
-      lodash, bitcore, txStatus);
-
+  ProcessingTxController.call(this, $rootScope, $scope, $timeout, $log, coloredCoins, gettext, profileService,
+      lodash, bitcore, txStatus, walletService, configService, txFormatService, ongoingProcess, $ionicModal);
 
   var self = this;
 
@@ -41,15 +41,6 @@ var AssetTransferController = function ($rootScope, $scope, $timeout, $log, colo
 
     if (form.$invalid) {
       this.error = gettext('Unable to send transaction proposal');
-      return;
-    }
-
-    var fc = profileService.focusedClient;
-    if (fc.isPrivKeyEncrypted()) {
-      profileService.unlockFC(function (err) {
-        if (err) return self._setError(err);
-        return $scope.transferAsset(transfer, form);
-      });
       return;
     }
 

@@ -22,8 +22,8 @@ angular.module('copayApp.services').factory('txFormatService', function(profileS
   };
 
   root.processTx = function(tx) {
-    if (!tx || tx.action == 'invalid') 
-      return tx; 
+    if (!tx || tx.action == 'invalid')
+      return tx;
 
     // New transaction output format
     if (tx.outputs && tx.outputs.length) {
@@ -42,10 +42,14 @@ angular.module('copayApp.services').factory('txFormatService', function(profileS
         }, 0);
       }
       tx.toAddress = tx.outputs[0].toAddress;
-    } 
+    }
 
     tx.amountStr = formatAmountStr(tx.amount);
     tx.alternativeAmountStr = formatAlternativeStr(tx.amount);
+    tx.isAsset = tx.customData && tx.customData.asset;
+    if (tx.isAsset) {
+      tx.assetAmountStr = tx.customData.asset.amount + " unit" + (tx.customData.asset.amount > 1 ? "s" : "");
+    }
     tx.feeStr = formatFeeStr(tx.fee || tx.fees);
 
     return tx;
