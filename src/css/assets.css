@@ -6,6 +6,11 @@
   cursor: pointer;
 }
 
+.bar .title {
+  left: 40px !important;
+  right: 40px !important;
+}
+
 .issued-badge {
   width: 37px;
   height: 37px;
