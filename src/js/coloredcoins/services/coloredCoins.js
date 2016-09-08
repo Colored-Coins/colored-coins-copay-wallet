@@ -1,6 +1,6 @@
 'use strict';
 
-function ColoredCoins($rootScope, profileService, ccConfig, ccFeeService, bitcore, $http, $log, lodash) {
+function ColoredCoins($rootScope, profileService, ccFeeService, bitcore, $http, $log, lodash) {
   var root = {},
       lockedUtxos = [],
       self = this;
@@ -58,7 +58,7 @@ function ColoredCoins($rootScope, profileService, ccConfig, ccFeeService, bitcor
 
   var getFrom = function (api_endpoint, param, network, cb) {
     $log.debug('Get from:' + api_endpoint + '/' + param);
-    $http.get(ccConfig.api[network] + '/v2/' + api_endpoint + '/' + param)
+    $http.get('/api/' + network + '/v3/' + api_endpoint + '/' + param)
         .success(function (data, status) {
           return handleResponse(data, status, cb);
         })
@@ -69,7 +69,7 @@ function ColoredCoins($rootScope, profileService, ccConfig, ccFeeService, bitcor
 
   var postTo = function(api_endpoint, json_data, network, cb) {
     $log.debug('Post to:' + api_endpoint + ". Data: " + JSON.stringify(json_data));
-    $http.post(ccConfig.api[network] + '/v2/' + api_endpoint, json_data)
+    $http.post('/api/' + network + '/v3/' + api_endpoint, json_data)
         .success(function (data, status) {
           return handleResponse(data, status, cb);
         })

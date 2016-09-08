@@ -104,3 +104,6 @@ public/icons/*
 public/css/*
 public/lib/*
 public/js/*
+
+# Dotenv file
+.env
