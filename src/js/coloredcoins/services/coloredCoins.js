@@ -258,7 +258,7 @@ function ColoredCoins($rootScope, profileService, ccFeeService, bitcore, $http, 
         if (err) { return cb(err); }
 
         var transfer = {
-          from: asset.address,
+          sendutxo: [asset.utxo.txid + ':' + asset.utxo.index],
           fee: fee,
           to: to,
           financeOutput: {
