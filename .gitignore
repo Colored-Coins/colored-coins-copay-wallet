@@ -137,6 +137,5 @@ cordova/ios/splash/
 cordova/ios/icons/
 cordova/project/
 
-
-
-
+# Dotenv file
+.env

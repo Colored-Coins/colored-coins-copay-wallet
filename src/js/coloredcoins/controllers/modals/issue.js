@@ -1,7 +1,7 @@
 'use strict';
 
 var AssetIssueController = function ($rootScope, $scope, $timeout, $log, coloredCoins, gettext,
-                                     profileService, lodash, bitcore, txStatus, ccConfig, Upload,
+                                     profileService, lodash, bitcore, txStatus, Upload,
                                      ccFeeService, configService, walletService, txFormatService,
                                      ongoingProcess, $ionicModal) {
 
@@ -58,7 +58,7 @@ var AssetIssueController = function ($rootScope, $scope, $timeout, $log, colored
 
   var createAssetWithIcon = function(issuance, icon) {
     Upload.upload({
-      url: ccConfig.uploadHost + '/upload',
+      url: '/upload',
       file: icon
     }).success(function (iconData, status, headers, config) {
       if (!iconData.url || iconData.url.indexOf('https://s3') != 0) {
