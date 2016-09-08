@@ -62,7 +62,8 @@
                   <span translate>Pending Confirmation</span>: {{index.pendingAmountStr}}
                 </div>
               </div>
-              <div class="size-14 view-assets-btn" ng-click="index.showAssets()">view assets</div>
+              <div class="size-14 view-assets-btn" ng-click="index.showAssets()">
+                <img src="img/cc-icon-active.png" width="23"/> view assets</div>
 
               <div ng-show="!index.updateError && index.walletScanStatus != 'error' && index.shouldHideBalance" on-hold="index.onHold()">
                 <strong class="size-24" translate>[Balance Hidden]</strong>
