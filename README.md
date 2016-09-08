@@ -1,4 +1,5 @@
 <img src="https://raw.githubusercontent.com/bitpay/copay/master/public/img/logo.png" alt="Copay" width="176">
+
 <img src="https://camo.githubusercontent.com/0ca366e1d25874f18420afc0e874bba33f158a09/687474703a2f2f636f6c6f726564636f696e732e6f72672f776f726470726573732f77702d636f6e74656e742f7468656d65732f436f6c6f726564636f696e732f696d67732f6c6f676f2d666f6f7465722e706e67" width="176"/>
 
 [Copay](https://github.com/bitpay/copay) wallet integrated with [Colored Coins API](http://coloredcoins.org/documentation).
