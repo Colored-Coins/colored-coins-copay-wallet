@@ -2,30 +2,28 @@
   ng-controller="disclaimerController as disclaimer" ng-init="disclaimer.init()">
   <div class="row">
     <div class="medium-centered small-centered large-centered columns size-14">
-      <span class="text-bold text-white" translate>WELCOME TO COPAY</span>
-      <p class="text-gray m0 text-light" translate>A multisignature bitcoin wallet</p>
+      <logo negative="true"></logo>
+      <div class="p20">
+        <span class="text-bold text-white" translate>WELCOME TO COLORED COPAY</span>
+        <p class="text-gray m0 text-light" translate>A multisignature bitcoin wallet with colored coins support</p>
+      </div>
     </div>
   </div>
   <div class="row">
-    <div class="scrollArea">
+    <div>
       <p class="enable_text_select m0">
-        <div class="size-14 text-gray" translate>Terms of Use</div>
-        <div ng-include="'views/includes/terms.html'"></div>
+        <div class="size-14 text-gray " translate>Terms of Use</div>
+        <div ng-include="'views/includes/terms.html'" class="p10 m10 text-light text-left cc-disclaimer"></div>
       </p>
     </div>
   </div>
 
   <div class="row">
-    <p ng-show="disclaimer.lang != 'en'">
-      <a class="center" ng-click="$root.openExternalLink('https://copay.io/disclaimer')" translate>Official English Disclaimer</a>
-    </p>
-  </div>
-  <div>
-      <p class="text-gray columns size-12" translate>I affirm that I have read, understood, and agree with these terms.</p>
-  </div>
-  <div class="row">
-
     <div class="start-button columns button-box">
+      <div>
+          <p class="text-gray columns size-12" translate>I affirm that I have read, understood, and agree with these terms.</p>
+      </div>
+
       <button ng-click="disclaimer.accept()" class="button black expand round size-12 text-spacing m0" translate>
         I AGREE. GET STARTED
       </button>
