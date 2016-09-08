@@ -5,7 +5,9 @@
         <span class="text-close" translate>Close</span>
       </a>
     </div>
-    <h1 class="title ellipsis" translate>Payment Proposal</h1>
+    <h1 class="title ellipsis" ng-show="tx.isAsset && tx.isAsset.action == 'transfer'" translate>Asset Transfer Proposal</h1>
+    <h1 class="title ellipsis" ng-show="tx.isAsset && tx.isAsset.action == 'issue'" translate>Asset Issuance Proposal</h1>
+    <h1 class="title ellipsis" ng-hide="tx.isAsset" translate>Payment Proposal</h1>
   </ion-header-bar>
 
   <ion-content ng-style="{'background-color': '#F6F7F9'}">
@@ -16,8 +18,8 @@
         <i class="db fi-arrow-down size-24 m10v"></i>
         <span class="payment-proposal-to" ng-click="copyToClipboard(tx.toAddress, $event)">
           <i class="fi-bitcoin left"></i>
-          <contact ng-if="!tx.hasMultiplesOutputs" class="dib enable_text_select ellipsis m5t m5b size-14" address="{{tx.toAddress}}"></contact>
-          <span ng-if="tx.hasMultiplesOutputs" translate>Multiple recipients</span>
+          <contact ng-if="!tx.hasMultiplesOutputs || tx.isAsset" class="dib enable_text_select ellipsis m5t m5b size-14" address="{{tx.toAddress}}"></contact>
+          <span ng-if="tx.hasMultiplesOutputs && !tx.isAsset" translate>Multiple recipients</span>
         </span>
       </div>
 
@@ -72,7 +74,7 @@
           <span class="right">{{tx.message}}</span>
         </li>
 
-        <li ng-show="tx.hasMultiplesOutputs" class="line-b p10 oh" ng-click="showMultiplesOutputs = !showMultiplesOutputs">
+        <li ng-show="tx.hasMultiplesOutputs && !tx.isAsset" class="line-b p10 oh" ng-click="showMultiplesOutputs = !showMultiplesOutputs">
           <span class="text-gray" translate>Recipients</span>
           <span class="right">{{tx.recipientCount}}
             <i ng-show="showMultiplesOutputs" class="icon-arrow-up3 size-24"></i>
@@ -80,7 +82,7 @@
           </span>
         </li>
 
-        <div class="line-b" ng-show="tx.hasMultiplesOutputs && showMultiplesOutputs"
+        <div class="line-b" ng-show="tx.hasMultiplesOutputs && showMultiplesOutputs && !tx.isAsset"
           ng-repeat="output in tx.outputs" ng-include="'views/includes/output.html'">
         </div>
 
