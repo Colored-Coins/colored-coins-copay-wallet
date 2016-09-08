@@ -1,7 +1,5 @@
 .view-assets-btn {
-  border: 1px solid white;
-  border-radius: 2px;
-  width: 100px;
+  width: 120px;
   margin: 20px auto 0 auto;
   cursor: pointer;
 }
