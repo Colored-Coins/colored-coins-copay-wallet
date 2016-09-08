@@ -62,6 +62,8 @@
                   <span translate>Pending Confirmation</span>: {{index.pendingAmountStr}}
                 </div>
               </div>
+              <div class="size-14 view-assets-btn" ng-click="index.showAssets()">
+                <img src="img/cc-icon-active.png" width="23"/> view assets</div>
 
               <div ng-show="!index.updateError && index.walletScanStatus != 'error' && index.shouldHideBalance" on-hold="index.onHold()">
                 <strong class="size-24" translate>[Balance Hidden]</strong>
@@ -179,13 +181,20 @@
                 <div class="m10r left">
                   <img src="img/icon-receive-history.svg" alt="sync" width="40" ng-show="btx.action == 'received'">
                   <img src="img/icon-sent-history.svg" alt="sync" width="40" ng-show="btx.action == 'sent'">
-                  <img src="img/icon-moved.svg" alt="sync" width="40" ng-show="btx.action == 'moved'">
+                  <img src="img/icon-moved.svg" alt="sync" width="40" ng-show="btx.action == 'moved' && !(btx.isAsset && btx.isAsset.action == 'issue')">
+                  <i class="icon ion-ribbon-b issued-badge" ng-show="btx.isAsset && btx.isAsset.action == 'issue'"></i>
                 </div>
                 <div class="m10t">
                   <span ng-show="btx.action == 'received'">
                     <span class="ellipsis">
                       <span ng-if="btx.note.body">{{btx.note.body}}</span>
                       <span ng-if="!btx.note.body" translate> Received</span>
+                      <span ng-if="btx.isAsset"> asset</span>
+                    </span>
+                  </span>
+                  <span ng-show="btx.isAsset && btx.isAsset.action == 'issue'">
+                    <span class="ellipsis">
+                      Issued asset
                     </span>
                   </span>
                   <span ng-show="btx.action == 'sent'">
@@ -193,16 +202,19 @@
                       <span ng-if="btx.message">{{btx.message}}</span>
                       <span ng-if="!btx.message && btx.note.body">{{btx.note.body}}</span>
                       <span ng-if="!btx.message && !btx.note.body && index.addressbook[btx.addressTo]">{{index.addressbook[btx.addressTo]}}</span>
-                      <span ng-if="!btx.message && !btx.note.body && !index.addressbook[btx.addressTo]" translate> Sent</span>
+                      <span ng-if="!btx.message && !btx.note.body && !index.addressbook[btx.addressTo]" translate> Sent<span ng-if="btx.isAsset"> asset</span></span>
                     </span>
                   </span>
-                  <span ng-show="btx.action == 'moved'">
+                  <span ng-show="btx.action == 'moved' && !(btx.isAsset && btx.isAsset.action == 'issue')">
                     <span class="ellipsis">
                       <span ng-if="btx.note.body">{{btx.note.body}}</span>
                       <span ng-if="!btx.note.body" translate>Moved</span>
+                      <span ng-if="btx.isAsset"> asset</span>
                     </span>
-
                   </span>
+                  <div class="ellipsis size-12 text-gray" ng-if="btx.isAsset">
+                     {{btx.isAsset.assetName}}
+                  </div>
                   <span class="label tu warning radius" ng-show="btx.action == 'invalid'" translate>Invalid</span>
                 </div>
               </div>
@@ -214,7 +226,10 @@
                   <span  class="size-12" ng-if="btx.action == 'invalid'" translate>
                   (possible double spend)
                   </span>
-                  <span  ng-if="btx.action != 'invalid'">
+                  <span ng-if="btx.isAsset">
+                     {{btx.assetAmountStr}}
+                  </span>
+                  <span  ng-if="btx.action != 'invalid' && !btx.isAsset">
                   {{btx.amountStr}}
                   </span>
                 </span>

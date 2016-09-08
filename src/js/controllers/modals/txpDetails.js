@@ -252,7 +252,16 @@ angular.module('copayApp.controllers').controller('txpDetailsController', functi
     $scope.tx = txFormatService.processTx(txp);
     $scope.cb = cb;
 
-    $ionicModal.fromTemplateUrl('views/modals/tx-status.html', {
+    var txStatusUrl = 'views/modals/tx-status.html';
+    if (tx.customData && tx.customData.asset) {
+      if (tx.customData.asset.action == 'transfer') {
+        txStatusUrl = 'views/coloredcoins/modals/transfer-status.html';
+      } else {
+        txStatusUrl = 'views/coloredcoins/modals/issue-status.html';
+      }
+    }
+
+    $ionicModal.fromTemplateUrl(txStatusUrl, {
       scope: $scope,
       animation: 'slide-in-up'
     }).then(function(modal) {

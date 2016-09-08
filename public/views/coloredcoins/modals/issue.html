@@ -1,0 +1,146 @@
+<ion-modal-view ng-controller="assetIssueController">
+  <ion-header-bar align-title="center" class="tab-bar" ng-style="{'background-color':color}">
+    <div class="left-small">
+      <a ng-click="cancel()" class="p10">
+        <i class="icon-arrow-left3 icon-back"></i>
+        <span class="text-back" translate>Back</span>
+      </a>
+    </div>
+    <h1 class="title ellipsis" translate>Issue new asset</h1>
+  </ion-header-bar>
+
+  <ion-content ng-style="{'background-color': '#F6F7F9'}">
+    <div class="modal-content">
+      <div class="row m20t">
+          <div class="large-12 large-centered columns">
+              <form name="assetIssueForm" ng-submit="issueAsset(assetIssueForm)" ng-disabled="home.blockUx || home.onGoingProcess" novalidate>
+                  <div class="box-notification" ng-show="error" ng-click="resetError()">
+                    <span class="text-warning">
+                      {{ error|translate }}
+                    </span>
+                      <a class="close-notification text-warning">&#215;</a>
+                  </div>
+
+                  <div class="text-center m10b">
+                      <div class="cc-icon-dropbox cc-asset-icon" ngf-drop ngf-select ngf-accept="'image/*'" ng-model="file"
+                           ngf-drag-over-class="dragover" ngf-multiple="false" ngf-allow-dir="false">
+                          <img ngf-src="file" ng-show="file">
+                          <span ng-hide="file">Add icon</span>
+                      </div>
+                  </div>
+
+                  <div>
+                      <div class="row collapse">
+                          <label for="assetName" class="left">
+                              <span translate>Name</span>
+                          </label>
+                      </div>
+                      <div class="input">
+                          <input type="text" id="assetName" name="assetName" ng-disabled="home.blockUx"
+                                 ng-attr-placeholder="{{'Asset Name' | translate}}" ng-model="issuance.assetName"
+                                 required ng-focus="home.formFocus('assetName')" ng-blur="home.formFocus(false)">
+                      </div>
+                  </div>
+                  <div>
+                      <div class="row collapse">
+                          <label for="issuer" class="left">
+                              <span translate>Issuer</span>
+                          </label>
+                      </div>
+                      <div class="input">
+                          <input type="text" id="issuer" name="issuer" ng-disabled="home.blockUx"
+                                 ng-attr-placeholder="{{'Issuer' | translate}}" ng-model="issuance.issuer"
+                                 required ng-focus="home.formFocus('issuer')" ng-blur="home.formFocus(false)">
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="large-12 medium-12 columns">
+                          <div class="right" ng-hide="assetIssueForm.amount.$pristine && !assetIssueForm.amount.$modelValue ">
+                              <span class="has-error right size-12" ng-show="assetIssueForm.amount.$invalid">
+                                  <i class="icon-close-circle size-14"></i>
+                                  <span clas="vm" translate>Not valid</span>
+                              </span>
+                              <small class="text-primary right" ng-show="!assetIssueForm.amount.$invalid">
+                                  <i class="icon-checkmark-circle size-14"></i>
+                              </small>
+                          </div>
+                          <div>
+                              <label for="amount">
+                                  <span translate>Quantity</span>
+                              </label>
+
+                              <div class="input">
+                                  <input type="number" id="amount" ng-disabled="home.blockUx || home.lockAmount" name="amount"
+                                         ng-attr-placeholder="{{'Quantity'|translate}}"
+                                         min="1" ng-pattern="/^\d*$/"
+                                         ng-model="issuance.amount" required autocomplete="off"
+                                         ng-focus="home.formFocus('amount')" ng-blur="home.formFocus(false)">
+                                  <a class="postfix" translate>units</a>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div>
+                      <div class="row collapse">
+                          <label for="description" class="left">
+                              <span translate>Description</span>
+                          </label>
+                      </div>
+                      <div class="input">
+                          <input type="text" id="description" name="description" ng-disabled="home.blockUx"
+                                 ng-attr-placeholder="{{'Description' | translate}}" ng-model="issuance.description"
+                                 ng-focus="home.formFocus('description')" ng-blur="home.formFocus(false)">
+                      </div>
+                  </div>
+                  <div>
+                      <div class="row collapse">
+                          <ion-toggle ng-model="issuance.reissuable" toggle-class="toggle-balanced" class="cc-inline-switch">
+                            <span class="toggle-label" translate>Reissuable</span>
+                          </ion-toggle>
+                      </div>
+                  </div>
+
+                  <h4 class="title" translate>Metadata</h4>
+                  <div>
+                      <div class="row" ng-repeat="field in issuance.userData">
+                          <div class="small-6 columns">
+                              <input type="text" ng-disabled="assets.blockUx"
+                                     ng-attr-placeholder="{{'Name' | translate}}" ng-model="field.name">
+                          </div>
+                          <div class="small-6 columns">
+                              <input type="text" id="description" name="description" ng-disabled="assets.blockUx"
+                                     ng-attr-placeholder="{{'Value' | translate}}" ng-model="field.value">
+                              <a class="postfix size-12 m0 text-gray" ng-click="removeField(field)">
+                                  <i class="fi-minus-circle size-18"></i>
+                              </a>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="text-center">
+                      <a ng-click="addField()" class="button outline round light-gray tiny cc-add-field-button">
+                          <i class="fi-plus size-18 vm"></i>
+                          <span translate>Add metadata field</span>
+                      </a>
+                  </div>
+
+                  <div class="row" ng-show="!home.onGoingProcess">
+                      <div class="columns"
+                           ng-class="{'small-6 medium-6 large-6':(home.lockAddress || home.lockAmount)}">
+                          <div class="size-12 text-center text-gray">
+                              <span translate>Estimated cost (including network fee): </span>
+                              <span class="text-bold">{{ estimatedCost }}</span>
+                          </div>
+                          <button type="submit" class="button black round expand"
+                                  ng-disabled="assetIssueForm.$invalid || home.blockUx ||  index.isOffline"
+                                  ng-style="{'background-color':index.backgroundColor}" translate>
+                              Issue
+                          </button>
+                      </div>
+                  </div>
+              </form>
+          </div>
+      </div>
+      <div class="extra-margin-bottom"></div>
+    </div> <!-- END Send -->
+  </ion-content>
+</ion-modal-view>

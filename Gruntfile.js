@@ -81,7 +81,8 @@ module.exports = function(grunt) {
           'src/js/routes.js',
           'src/js/services/*.js',
           'src/js/models/*.js',
-          'src/js/controllers/**/*.js'
+          'src/js/controllers/**/*.js',
+          'src/js/coloredcoins/**/*.js'
         ],
         tasks: ['concat:js']
       }
@@ -119,7 +120,8 @@ module.exports = function(grunt) {
           'bower_components/ng-csv/build/ng-csv.js',
           'bower_components/angular-mocks/angular-mocks.js',
           'angular-pbkdf2/angular-pbkdf2.js',
-          'angular-bitcore-wallet-client/angular-bitcore-wallet-client.js'
+          'angular-bitcore-wallet-client/angular-bitcore-wallet-client.js',
+          'bower_components/ng-file-upload/ng-file-upload.js'
         ],
         dest: 'public/lib/angular.js'
       },
@@ -137,7 +139,13 @@ module.exports = function(grunt) {
           'src/js/coinbase.js',
           'src/js/init.js',
           'src/js/trezor-url.js',
-          'bower_components/trezor-connect/login.js'
+          'bower_components/trezor-connect/login.js',
+          'src/js/coloredcoins/copayColoredCoins.js',
+          'src/js/coloredcoins/overrides/*.js',
+          'src/js/coloredcoins/controllers/**/*.js',
+          'src/js/coloredcoins/filters/*.js',
+          'src/js/coloredcoins/services/*.js',
+          'src/js/coloredcoins/directives/*.js'
         ],
         dest: 'public/js/copay.js'
       },

@@ -1,16 +1,17 @@
 <div class="m20t">
   <label class="size-14 text-center">
-    <span translate>Send bitcoin</span>
+    <span translate>Send {{ tx.isAsset ? 'asset' : 'bitcoin' }}</span>
   </label>
 </div>
 <div class="text-center">
-  <div class="size-36">{{tx.amountStr}}</div>
-  <div class="size-12 label gray radius" ng-show="tx.alternativeAmountStr">{{tx.alternativeAmountStr}}</div>
+  <div class="size-36" ng-hide="tx.isAsset">{{tx.amountStr}}</div>
+  <div class="size-36" ng-show="tx.isAsset">{{tx.assetAmountStr}}</div>
+  <div class="size-12 label gray radius" ng-show="tx.alternativeAmountStr && !tx.isAsset">{{tx.alternativeAmountStr}}</div>
   <i class="db fi-arrow-down size-24 m10v"></i>
   <div class="payment-proposal-to" ng-click="copyToClipboard(tx.toAddress, $event)">
     <i class="fi-bitcoin left m10l"></i>
-    <contact ng-if="!tx.hasMultiplesOutputs" class="dib enable_text_select ellipsis m5t m5b m15l size-14" address="{{tx.toAddress}}"></contact>
-    <span ng-if="tx.hasMultiplesOutputs" translate>
+    <contact ng-if="!tx.hasMultiplesOutputs || tx.isAsset" class="dib enable_text_select ellipsis m5t m5b m15l size-14" address="{{tx.toAddress}}"></contact>
+    <span ng-if="tx.hasMultiplesOutputs && !tx.isAsset" translate>
       Multiple recipients
     </span>
   </div>
