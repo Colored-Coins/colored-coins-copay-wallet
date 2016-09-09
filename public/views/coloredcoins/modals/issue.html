@@ -13,7 +13,7 @@
     <div class="modal-content">
       <div class="row m20t">
           <div class="large-12 large-centered columns">
-              <form name="assetIssueForm" ng-submit="issueAsset(assetIssueForm)" ng-disabled="home.blockUx || home.onGoingProcess" novalidate>
+              <form name="assetIssueForm" ng-submit="issueAsset(assetIssueForm)" ng-disabled="assets.blockUx || home.onGoingProcess" novalidate>
                   <div class="box-notification" ng-show="error" ng-click="resetError()">
                     <span class="text-warning">
                       {{ error|translate }}
@@ -36,7 +36,7 @@
                           </label>
                       </div>
                       <div class="input">
-                          <input type="text" id="assetName" name="assetName" ng-disabled="home.blockUx"
+                          <input type="text" id="assetName" name="assetName" ng-disabled="assets.blockUx"
                                  ng-attr-placeholder="{{'Asset Name' | translate}}" ng-model="issuance.assetName"
                                  required ng-focus="home.formFocus('assetName')" ng-blur="home.formFocus(false)">
                       </div>
@@ -48,7 +48,7 @@
                           </label>
                       </div>
                       <div class="input">
-                          <input type="text" id="issuer" name="issuer" ng-disabled="home.blockUx"
+                          <input type="text" id="issuer" name="issuer" ng-disabled="assets.blockUx"
                                  ng-attr-placeholder="{{'Issuer' | translate}}" ng-model="issuance.issuer"
                                  required ng-focus="home.formFocus('issuer')" ng-blur="home.formFocus(false)">
                       </div>
@@ -70,7 +70,7 @@
                               </label>
 
                               <div class="input">
-                                  <input type="number" id="amount" ng-disabled="home.blockUx || home.lockAmount" name="amount"
+                                  <input type="number" id="amount" ng-disabled="assets.blockUx || home.lockAmount" name="amount"
                                          ng-attr-placeholder="{{'Quantity'|translate}}"
                                          min="1" ng-pattern="/^\d*$/"
                                          ng-model="issuance.amount" required autocomplete="off"
@@ -87,14 +87,15 @@
                           </label>
                       </div>
                       <div class="input">
-                          <input type="text" id="description" name="description" ng-disabled="home.blockUx"
+                          <input type="text" id="description" name="description" ng-disabled="assets.blockUx"
                                  ng-attr-placeholder="{{'Description' | translate}}" ng-model="issuance.description"
                                  ng-focus="home.formFocus('description')" ng-blur="home.formFocus(false)">
                       </div>
                   </div>
                   <div>
                       <div class="row collapse">
-                          <ion-toggle ng-model="issuance.reissuable" toggle-class="toggle-balanced" class="cc-inline-switch">
+                          <ion-toggle ng-model="issuance.reissuable" toggle-class="toggle-balanced"
+                           class="cc-inline-switch" ng-disabled="assets.blockUx">
                             <span class="toggle-label" translate>Reissuable</span>
                           </ion-toggle>
                       </div>
@@ -117,7 +118,8 @@
                       </div>
                   </div>
                   <div class="text-center">
-                      <a ng-click="addField()" class="button outline round light-gray tiny cc-add-field-button">
+                      <a ng-click="addField()" class="button outline round light-gray tiny cc-add-field-button"
+                          ng-disabled="assets.blockUx">
                           <i class="fi-plus size-18 vm"></i>
                           <span translate>Add metadata field</span>
                       </a>
@@ -131,7 +133,7 @@
                               <span class="text-bold">{{ estimatedCost }}</span>
                           </div>
                           <button type="submit" class="button black round expand"
-                                  ng-disabled="assetIssueForm.$invalid || home.blockUx ||  index.isOffline"
+                                  ng-disabled="assetIssueForm.$invalid || assets.blockUx ||  index.isOffline"
                                   ng-style="{'background-color':index.backgroundColor}" translate>
                               Issue
                           </button>
