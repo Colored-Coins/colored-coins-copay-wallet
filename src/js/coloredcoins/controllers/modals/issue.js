@@ -34,6 +34,8 @@ var AssetIssueController = function ($rootScope, $scope, $timeout, $log, colored
   };
 
   $scope.cancel = function () {
+    self.setOngoingProcess();
+    ongoingProcess.clear();
     $scope.issueAssetModal.hide();
   };
 

@@ -28,7 +28,8 @@ var AssetTransferController = function ($rootScope, $scope, $timeout, $log, colo
   };
 
   $scope.cancel = function () {
-    console.log($scope.assetTransferModal);
+    self.setOngoingProcess();
+    ongoingProcess.clear();
     $scope.assetTransferModal.hide();
   };
 
