@@ -26,7 +26,7 @@ var AssetIssueController = function ($rootScope, $scope, $timeout, $log, colored
   });
 
   $scope.addField = function() {
-    $scope.issuance.userData.push({ name: '', value: ''});
+    $scope.issuance.userData.push({ key: '', value: '', type: 'String' });
   };
 
   $scope.removeField = function(field) {

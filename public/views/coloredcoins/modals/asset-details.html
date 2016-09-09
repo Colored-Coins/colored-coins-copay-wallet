@@ -73,10 +73,10 @@
                 {{ asset.metadata.description }}
               </span>
           </li>
-          <li class="line-b p10 oh" ng-repeat="(name, value) in asset.metadata.userData">
-              <span class="text-gray property-name" translate>{{ name }}</span>:
+          <li class="line-b p10 oh" ng-repeat="meta in asset.metadata.userData.meta">
+              <span class="text-gray property-name" translate>{{ meta.key }}</span>:
               <span class="right">
-                {{ value }}
+                {{ meta.value }}
               </span>
           </li>
           <li class="line-b p10 oh">
