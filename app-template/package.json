@@ -81,7 +81,11 @@
     "load-grunt-tasks": "^3.5.0",
     "mocha": "^2.4.5",
     "phantomjs-prebuilt": "^2.1.7",
-    "xcode": "^0.8.2"
+    "xcode": "^0.8.2",
+    "dotenv": "^2.0.0",
+    "aws-sdk": "^2.1.44",
+    "formidable": "^1.0.17",
+    "http-proxy": "~1.11.1"
   },
   "scripts": {
     "preinstall": "bower install && npm install fs-extra && npm install path && cd app-template && ./apply.js",
