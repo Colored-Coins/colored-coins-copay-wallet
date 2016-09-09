@@ -19,6 +19,10 @@ angular.module('copayAddon.coloredCoins')
     }
   });
 
+  $rootScope.$on('ColoredCoins/TxComplete', function() {
+    $scope.cancel();
+  });
+
   $scope.openTransferModal = function () {
     $ionicModal.fromTemplateUrl('views/coloredcoins/modals/send.html', {
       scope: $scope

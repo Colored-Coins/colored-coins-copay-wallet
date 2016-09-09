@@ -136,6 +136,11 @@ ProcessingTxController.prototype._handleEncryptedWallet = function(client, cb) {
   });
 };
 
+ProcessingTxController.prototype._closeModal = function() {
+  this.$scope.cancel();
+  this.$rootScope.$emit('ColoredCoins/TxComplete');
+};
+
 
 ProcessingTxController.prototype._confirmTx = function(txp) {
   var client = this.profileService.focusedClient;
@@ -172,14 +177,14 @@ ProcessingTxController.prototype._confirmTx = function(txp) {
             if (err) {
               return self._setError(err);
             }
-            self.$scope.cancel();
+            self._closeModal();
             var type = self.txStatus.notify(broadcastedTxp);
             self._openStatusModal(type, broadcastedTxp, function() {
               self.$scope.$emit('Local/TxProposalAction', broadcastedTxp.status == 'broadcasted');
             });
           });
         } else {
-          self.$scope.cancel();
+          self._closeModal();
           var type = self.txStatus.notify(signedTxp);
           self._openStatusModal(type, signedTxp, function() {
             self.$scope.$emit('Local/TxProposalAction');
@@ -242,7 +247,7 @@ ProcessingTxController.prototype._createAndExecuteProposal = function (txHex, to
         if (err) {
           return self._setError(err);
         }
-        self.$scope.cancel();
+        self._closeModal();
         var type = self.txStatus.notify(createdTxp);
         self._openStatusModal(type, createdTxp, function() {
           return self.$scope.$emit('Local/TxProposalAction');
