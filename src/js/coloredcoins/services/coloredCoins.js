@@ -289,13 +289,9 @@ function ColoredCoins($rootScope, profileService, ccFeeService, bitcore, $http, 
         if (err) { return cb(err); }
 
         var metadata = lodash.pick(issuance, ['assetName', 'description', 'issuer', 'urls', 'userData']);
-        // convert { name: 'Color', value: 'Blue' } to { "Color" : "Blue" }
-        metadata.userData = lodash.reduce(metadata.userData, function(result, field) {
-          if (field.name != '' && field.value != '') {
-            result[field.name] = field.value;
-          }
-          return result;
-        }, {});
+        metadata.userData = {
+          meta: metadata.userData
+        };
 
         var issuanceOpts = {
           issueAddress: financeUtxo.address,
