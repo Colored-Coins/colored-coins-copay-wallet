@@ -1,6 +1,6 @@
 <div
   class="topbar-container"
-  ng-include="'views/includes/topbar.html'"
+  ng-include="'views/includes/topbar.html?v=' + index.assetVersion"
   ng-init="">
 </div>
 
@@ -38,7 +38,7 @@
             [ <span translate>{{index.m}}-of-{{index.n}}</span> ]
           </span>
         </h4>
-        <div class="white line-b p10" ng-include="'views/includes/copayers.html'"></div>
+        <div class="white line-b p10" ng-include="'views/includes/copayers.html?v=' + index.assetVersion"></div>
         <div ng-if="!index.isComplete" class="line-b p10 white size-12">
           <i class="fi-loop m5r p10l"></i>
           <span translate>Waiting...</span>

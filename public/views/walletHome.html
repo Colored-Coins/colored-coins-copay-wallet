@@ -1,6 +1,6 @@
 
 <div class="topbar-container"
-  ng-include="'views/includes/topbar.html'"
+  ng-include="'views/includes/topbar.html?v=' + index.assetVersion"
   ng-init="showPreferences = true" ng-show="!index.noFocusedWallet">
 </div>
 
@@ -80,7 +80,7 @@
           </div> <!-- amount -->
 
           <div class="wallet-info">
-            <span ng-include="'views/includes/walletInfo.html'"></span>
+            <span ng-include="'views/includes/walletInfo.html?v=' + index.assetVersion"></span>
           </div>
           <div class="camera-icon" ng-show="index.isComplete">
             <qr-scanner on-scan="home.onQrCodeScanned(data)"></qr-scanner>
@@ -534,4 +534,4 @@
   </div>
 </div>
 <div class="extra-margin-bottom"></div>
-<div ng-include="'views/includes/menu.html'" ng-show="!index.noFocusedWallet && !$root.shouldHideMenuBar"></div>
+<div ng-include="'views/includes/menu.html?v=' + index.assetVersion" ng-show="!index.noFocusedWallet && !$root.shouldHideMenuBar"></div>

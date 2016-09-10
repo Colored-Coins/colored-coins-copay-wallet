@@ -20,7 +20,7 @@
 
     <!-- Left menu -->
     <ion-side-menu side="left" expose-aside-when="large" ng-if="index.hasProfile && isDisclaimerAccepted">
-      <div ng-include="'views/includes/sidebar.html'"></div>
+      <div ng-include="'views/includes/sidebar.html?v=' + index.assetVersion"></div>
     </ion-side-menu>
 
     <!-- Main content -->
