@@ -21,9 +21,9 @@ angular.module('copayAddon.coloredCoins').factory('insight', function ($http, pr
         });
   };
 
-  var testnetInsight = new Insight({ network: 'testnet', url: 'https://test-insight.bitpay.com' });
+  var testnetInsight = new Insight({ network: 'testnet', url: 'https://test-insight.gat.hoopox.com' });
 
-  var livenetInsight = new Insight({ network: 'livenet', url: 'https://insight.bitpay.com' });
+  var livenetInsight = new Insight({ network: 'livenet', url: 'https://insight.gat.hoopox.com' });
 
   return {
     get: function() {

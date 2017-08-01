@@ -33,17 +33,17 @@
   },
   "dom_storage_quota": 200,
   "id": "jid1-x7bV5evAaI1P9Q",
-  "homepage": "https://github.com/bitpay/copay",
+  "homepage": "https://github.com/GridProject/copay",
   "license": "MIT",
   "repository": {
-    "url": "git://github.com/bitpay/copay.git",
+    "url": "git://github.com/GridProject/colored-coins-copay-wallet.git",
     "type": "git"
   },
   "bugs": {
-    "url": "https://github.com/bitpay/copay/issues"
+    "url": "https://github.com/GridProject/copay/issues"
   },
   "dependencies": {
-    "bitcore-wallet-client": "troggy/bitcore-wallet-client#v2.11.0",
+    "bitcore-wallet-client": "GridProject/bitcore-wallet-client#v2.11.0",
     "coveralls": "^2.11.9",
     "express": "^4.11.2",
     "fs": "0.0.2",
@@ -61,11 +61,14 @@
     "adm-zip": "^0.4.7",
     "angular": "1.4.6",
     "angular-mocks": "1.4.10",
+    "aws-sdk": "^2.1.44",
     "bhttp": "^1.2.1",
     "bower": "^1.7.9",
     "chai": "^3.5.0",
     "cordova": "5.4.1",
     "cordova-android": "5.1.1",
+    "dotenv": "^2.0.0",
+    "formidable": "^1.0.17",
     "grunt": "^1.0.1",
     "grunt-angular-gettext": "^2.2.3",
     "grunt-browserify": "^5.0.0",
@@ -80,6 +83,7 @@
     "grunt-nw-builder": "^2.0.3",
     "grunt-sass": "^1.2.0",
     "grunt-string-replace": "^1.2.1",
+    "http-proxy": "~1.11.1",
     "karma": "^0.13.22",
     "karma-chai": "^0.1.0",
     "karma-chrome-launcher": "^1.0.1",
@@ -91,11 +95,7 @@
     "karma-sinon": "^1.0.5",
     "load-grunt-tasks": "^3.5.0",
     "mocha": "^2.4.5",
-    "phantomjs-prebuilt": "^2.1.7",
-    "xcode": "^0.8.2",
-    "dotenv": "^2.0.0",
-    "aws-sdk": "^2.1.44",
-    "formidable": "^1.0.17",
-    "http-proxy": "~1.11.1"
+    "phantomjs-prebuilt": "^2.1.14",
+    "xcode": "^0.8.2"
   }
 }
