@@ -15,11 +15,11 @@ mainnetProxy.on('proxyReq', userAgent);
 
 var attach = function(app) {
   app.use('/api/testnet', cors, function(req, res) {
-    testnetProxy.web(req, res, { target:'http://testnet.api.coloredcoins.org' });
+    testnetProxy.web(req, res, { target:'http://127.0.0.1:8080' });
   });
 
   app.use('/api/livenet', cors, function(req, res) {
-    testnetProxy.web(req, res, { target:'http://api.coloredcoins.org' });
+    testnetProxy.web(req, res, { target:'http://127.0.0.1:8080' });
   });
 };
 
