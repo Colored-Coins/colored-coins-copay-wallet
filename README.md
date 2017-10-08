@@ -23,3 +23,4 @@ Refer to official Copay docs
 ## License
 
 Copay is released under the MIT License.  Please refer to the [LICENSE](https://github.com/bitpay/copay/blob/master/LICENSE) file that accompanies this project for more information including complete terms and conditions.
+
