@@ -1,6 +1,6 @@
 	<div
 	  class="topbar-container"
-	  ng-include="'views/includes/topbar.html'"
+	  ng-include="'views/includes/topbar.html?v=' + index.assetVersion"
 	  ng-init="titleSection='Terms of Use'; goBackToState = 'about'; noColor = true">
 	</div>
 	<div ng-controller="termOfUseController" class="content">

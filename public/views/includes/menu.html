@@ -3,7 +3,7 @@
         <div class="row collapse p0i">
             <div class="medium-4 small-4 columns text-center bottombar-item"
                  ng-repeat="item in index.menu">
-              <span ng-include="'views/includes/menu-item.html'"></span>
+              <span ng-include="'views/includes/menu-item.html?v=' + index.assetVersion"></span>
             </div>
         </div>
     </div>

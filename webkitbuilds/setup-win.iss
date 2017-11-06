@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Copay"
-#define MyAppVersion "2.5.0"
+#define MyAppVersion "2.7.0-colored.2"
 #define MyAppPublisher "BitPay"
 #define MyAppURL "https://copay.io"
 #define MyAppExeName "Copay.exe"
@@ -55,4 +55,3 @@ Root: HKCR; Subkey: "copay"; ValueType: "string"; ValueData: "URL:Copay Custom P
 Root: HKCR; Subkey: "copay"; ValueType: "string"; ValueName: "URL Protocol"; ValueData: ""
 Root: HKCR; Subkey: "copay\DefaultIcon"; ValueType: "string"; ValueData: "{app}\{#MyAppExeName},0"
 Root: HKCR; Subkey: "copay\shell\open\command"; ValueType: "string"; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
-

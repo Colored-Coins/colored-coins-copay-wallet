@@ -77,7 +77,7 @@
 
         <div class="line-b" ng-show="btx.hasMultiplesOutputs && showMultiplesOutputs && !btx.isAsset"
           ng-repeat="output in btx.outputs"
-          ng-include="'views/includes/output.html'">
+          ng-include="'views/includes/output.html?v=' + index.assetVersion">
         </div>
 
         <li ng-if="btx.action == 'invalid'" class="line-b p10 oh">

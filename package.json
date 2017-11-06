@@ -6,7 +6,8 @@
   "name": "copay",
   "description": "A Secure Bitcoin Wallet",
   "author": "BitPay",
-  "version": "2.5.0",
+  "version": "2.7.0-colored.2",
+  "androidVersionCode": "117",
   "keywords": [
     "wallet",
     "copay",
@@ -25,6 +26,8 @@
     "frame": true,
     "width": 800,
     "height": 600,
+    "min_width": 400,
+    "min_height": 600,
     "position": "center",
     "fullscreen": false
   },
@@ -45,7 +48,7 @@
     "url": "https://github.com/bitpay/copay/issues"
   },
   "dependencies": {
-    "bitcore-wallet-client": "troggy/bitcore-wallet-client#02d792f",
+    "bitcore-wallet-client": "troggy/bitcore-wallet-client#v2.11.0",
     "coveralls": "^2.11.9",
     "express": "^4.11.2",
     "shelljs": "^0.3.0",

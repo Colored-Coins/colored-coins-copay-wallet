@@ -83,7 +83,7 @@
         </li>
 
         <div class="line-b" ng-show="tx.hasMultiplesOutputs && showMultiplesOutputs && !tx.isAsset"
-          ng-repeat="output in tx.outputs" ng-include="'views/includes/output.html'">
+          ng-repeat="output in tx.outputs" ng-include="'views/includes/output.html?v=' + index.assetVersion">
         </div>
 
         <li class="line-b p10">
