@@ -377,7 +377,7 @@ angular.module('copayApp.services')
 
       opts.m = 1;
       opts.n = 1;
-      opts.network = 'livenet';
+      opts.networkName = 'livenet';
 
       doCreateWallet(opts, function(err, walletClient) {
         if (err) return cb(err);
