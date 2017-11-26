@@ -22,6 +22,8 @@ angular.module('copayApp.controllers').controller('indexController', function($r
   ret.physicalScreenWidth = ((window.innerWidth > 0) ? window.innerWidth : screen.width);
   ret.assetVersion = window.commitHash;
 
+  ret.appConfig = window.appConfig;
+
   // Only for testing
   //storageService.checkQuota();
 

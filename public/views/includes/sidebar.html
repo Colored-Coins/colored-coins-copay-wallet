@@ -5,6 +5,8 @@
      <img ng-if="sidebar.isWindowsPhoneApp" src="img/logo-negative.png" alt="Copay" width="80">
    </div>
     <div ng-include="'views/includes/version.html?v=' + index.assetVersion"></div>
+     <div class="cc-logo" style="width: 120px; height: 23px; background-size: 120px 23px;"></div>
+   </div>
   </header>
   <ion-content>
     <ul class="pr">
@@ -24,6 +26,13 @@
             <span class="size-12" translate>Add wallet</span>
           </div>
           <div translate>Create, join or import</div>
+      </li>
+      <li menu-toggle href ui-sref="bitpayCard" ng-show="index.isComplete && sidebar.bitpayCardEnabled">
+        <i class="icon-arrow-right3 size-18 right m10t vm"></i>
+        <i class="fi-credit-card size-24 icon vm"></i>
+        <div class="tu text-bold m10t">
+          <span class="size-12" translate>BitPay Card</span>
+        </div>
       </li>
       <li ng-show="!index.noFocusedWallet && !index.isWindowsPhoneApp && (index.glideraEnabled || index.coinbaseEnabled)" menu-toggle href ui-sref="buyandsell">
           <i class="icon-arrow-right3 size-18 right m10t vm"></i>
